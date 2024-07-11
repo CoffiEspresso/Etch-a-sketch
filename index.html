@@ -14,12 +14,19 @@
     <h1>Etch-a-Sketch</h1>
     <div class="wrapper" draggable="false">
         <div class="button-zone">
+            <div>
+                <label for="favcolor">Color:</label>
+                <input type="color" id="favcolor" name="favcolor" value="#ff0000">    
+            </div>
             <button id="clearAll"> Clear</button>
-            <button id="clearAll1"> Clear2</button>
-            <button id="clearAll2"> Clear3</button>
-            <button id="clearAll3"> Clear4</button>
+            <button id="gridLines" class ="gridOn"> Toggle Grid Lines</button>
+            <button id="eraser"> Eraser </button>
+            <button id="rainbow"> Rainbow</button>
+            <div class="sliderContainer">
+                <input id="slider" type="range" min="1" max="80" value="16">
+            </div>     
         </div>
-        <div class="grid" ondragstart="return false;" draggable="false">
+         <div class="grid" ondragstart="return false;" draggable="false">
         </div>
     </div>  
 </body>
