@@ -19,12 +19,32 @@ let cells;
 let border = 1;
 let colorType = "pen"; //can get only: pen, eraser, rainbow, light, dark or a color
 
-document.querySelector("#eraser").addEventListener("click", (e)=>{colorType = e.target.id});
-document.querySelector("#rainbow").addEventListener("click", (e)=>{colorType = e.target.id});
+document.querySelector("#eraser").addEventListener("click", (e)=>{colorType = e.target.id;
+    cells.forEach(cell => {
+        cell.style.cursor = "url('./images/eraser.png'), pointer";
+    });
+});
+document.querySelector("#rainbow").addEventListener("click", (e)=>{colorType = e.target.id;
+    cells.forEach(cell => {
+        cell.style.cursor = "url('./images/rainbow.png'), pointer";
+    });
+});
 document.querySelector("#favcolor").addEventListener("input", (e)=>{colorType = e.target.value});
-document.querySelector("#draw").addEventListener("click", ()=>{colorType = document.querySelector("#favcolor").value });
-document.querySelector("#light").addEventListener("click", ()=>{colorType = "light"});
-document.querySelector("#dark").addEventListener("click", ()=>{colorType = "dark"});
+document.querySelector("#draw").addEventListener("click", ()=>{colorType = document.querySelector("#favcolor").value;
+    cells.forEach(cell => {
+        cell.style.cursor = "url('./images/pencil.png'), pointer";
+    });
+});
+document.querySelector("#light").addEventListener("click", ()=>{colorType = "light";
+    cells.forEach(cell => {
+        cell.style.cursor = "url('./images/bulb.png'), pointer";
+    });
+});
+document.querySelector("#dark").addEventListener("click", ()=>{colorType = "dark";
+    cells.forEach(cell => {
+        cell.style.cursor = "url('./images/moon.png'), pointer";
+    });
+});
 
 
 
