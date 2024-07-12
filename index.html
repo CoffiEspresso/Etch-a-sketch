@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,26 +9,47 @@
     <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Micro+5+Charted&display=swap');
-        </style>
+    </style>
 </head>
+
 <body>
     <h1>Etch-a-Sketch</h1>
     <div class="wrapper" draggable="false">
         <div class="button-zone">
             <div>
-                <label for="favcolor">Color:</label>
-                <input type="color" id="favcolor" name="favcolor" value="#ff0000">    
+                <label class="text" for="favcolor">COLOR:</label>
+                <input class="button-36 color" type="color" id="favcolor" name="favcolor" value="#000000">
             </div>
-            <button id="clearAll"> Clear</button>
-            <button id="gridLines" class ="gridOn"> Toggle Grid Lines</button>
-            <button id="eraser"> Eraser </button>
-            <button id="rainbow"> Rainbow</button>
-            <div class="sliderContainer">
-                <input id="slider" type="range" min="1" max="80" value="16">
-            </div>     
+            <button class="button-36" id="draw"> Draw</button>
+            <button class="button-36" id="clearAll"> Clear</button>
+            <button class="button-36" id="eraser"> Eraser </button>
+            <button class="button-36" id="rainbow"> Rainbow</button>
+
+
+            <div class="shaders">
+                <p > SHADER:</p>
+                <button class="button-36" id="dark"> <img src="./images/dark.png" alt=""></button>
+                <button class="button-36" id="light"> <img src="./images/light.png" alt=""></button>
+            </div>
+            <!-- Rectangular switch -->
+            <div class="gridModifier">
+                <p> GRID LINES: </p>
+                <label class="switch">
+                    <input type="checkbox" id="gridLines" onclick="ToggleLines()">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            <div class="gridModifier">
+                <p> GRID SIZE: </p>
+
+                <div class="sliderContainer">
+                    <input id="slider" type="range" min="1" max="60" value="16">
+                </div>
+            </div>
         </div>
-         <div class="grid" ondragstart="return false;" draggable="false">
+        <div class="grid" ondragstart="return false;" draggable="false">
         </div>
-    </div>  
+    </div>
 </body>
+
 </html>

@@ -8,18 +8,23 @@ const BACKGROUND_GRIDCOLOR = "white";
 const sider = document.querySelector("#slider");
 slider.addEventListener('input', RedrawGrid);
 
-document.querySelector("#gridLines").addEventListener("click", ToggleLines);
+//document.querySelector("#gridLines").addEventListener("click", ToggleLines);
 
 const clearButton = document.querySelector("#clearAll");
 clearButton.addEventListener("click", ClearGrid);
 
+//document.querySelector("#gridLines").addEventListener("input", ToggleLines);
+
 let cells;
 let border = 1;
-let colorType = "pen"; //can get only: pen, eraser, rainbow, or a color
+let colorType = "pen"; //can get only: pen, eraser, rainbow, light, dark or a color
 
 document.querySelector("#eraser").addEventListener("click", (e)=>{colorType = e.target.id});
 document.querySelector("#rainbow").addEventListener("click", (e)=>{colorType = e.target.id});
 document.querySelector("#favcolor").addEventListener("input", (e)=>{colorType = e.target.value});
+document.querySelector("#draw").addEventListener("click", ()=>{colorType = document.querySelector("#favcolor").value });
+document.querySelector("#light").addEventListener("click", ()=>{colorType = "light"});
+document.querySelector("#dark").addEventListener("click", ()=>{colorType = "dark"});
 
 
 
@@ -39,7 +44,7 @@ function DrawGrid(dim){
         div.addEventListener("mouseenter", Paint);
         
         div.style.flex = `1 0 ${cellSize}px`;
-        div.style.background = BACKGROUND_GRIDCOLOR;
+        div.style.backgroundColor = BACKGROUND_GRIDCOLOR;
         
         div.classList.add("gridBorder");
      
@@ -68,16 +73,30 @@ function Paint(e) {
     }
 
     e.preventDefault();
-    if (e.buttons == 1) {
-        e.target.style.background = color ;
+    if (e.buttons == 1 && (colorType!="light" && colorType != "dark")) {
+        e.target.style.backgroundColor = color ;
         return;
     }
-    else;//do nothing?
+    else if (e.buttons == 1 && colorType=="light"){
+        let op;  
+        e.target.style.opacity != "" ? op = e.target.style.opacity : op = 1;
+        op = op - 0.1;
+        if(op>0.2)
+        e.target.style.opacity = op;
+
+    } 
+    else if (e.buttons == 1 && colorType=="dark"){
+        let op;
+        e.target.style.opacity != "" ? op = e.target.style.opacity : op = 1;
+        op = 0.1 + parseFloat(op);
+        e.target.style.opacity = op;
+    } 
+    ;//do nothing?
 }
 
 function ClearGrid() {
     cells.forEach(cell => {
-        cell.style.background = BACKGROUND_GRIDCOLOR;
+        cell.style.backgroundColor = BACKGROUND_GRIDCOLOR;
     });
     return;
 }
@@ -95,3 +114,12 @@ function ToggleLines(e){
         cell.classList.toggle("gridBorder");
     });
 }
+
+function hexToRgb(hex) {
+    let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
